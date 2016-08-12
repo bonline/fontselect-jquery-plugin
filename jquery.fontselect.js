@@ -5,231 +5,12 @@
  * MIT Licensed
  * @version 0.1
 */
-
+define(['require', 'jquery', 'cookie', 'underscore', 'propertyParser', 'font', 'jquery.isinview', 'fancybox', 'bootstrap-typeahead', 'webfontloader'], function (require, jQuery, Cookies, _) {
 (function($){
 
   $.fn.fontselect = function(options) {  
 
      var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
-
-     var fonts = [
-      "Aclonica",
-      "Allan",
-      "Annie+Use+Your+Telescope",
-      "Anonymous+Pro",
-      "Allerta+Stencil",
-      "Allerta",
-      "Amaranth",
-      "Anton",
-      "Architects+Daughter",
-      "Arimo",
-      "Artifika",
-      "Arvo",
-      "Asset",
-      "Astloch",
-      "Bangers",
-      "Bentham",
-      "Bevan",
-      "Bigshot+One",
-      "Bowlby+One",
-      "Bowlby+One+SC",
-      "Brawler",
-      "Buda:300",
-      "Cabin",
-      "Calligraffitti",
-      "Candal",
-      "Cantarell",
-      "Cardo",
-      "Carter One",
-      "Caudex",
-      "Cedarville+Cursive",
-      "Cherry+Cream+Soda",
-      "Chewy",
-      "Coda",
-      "Coming+Soon",
-      "Copse",
-      "Corben:700",
-      "Cousine",
-      "Covered+By+Your+Grace",
-      "Crafty+Girls",
-      "Crimson+Text",
-      "Crushed",
-      "Cuprum",
-      "Damion",
-      "Dancing+Script",
-      "Dawning+of+a+New+Day",
-      "Didact+Gothic",
-      "Droid+Sans",
-      "Droid+Sans+Mono",
-      "Droid+Serif",
-      "EB+Garamond",
-      "Expletus+Sans",
-      "Fontdiner+Swanky",
-      "Forum",
-      "Francois+One",
-      "Geo",
-      "Give+You+Glory",
-      "Goblin+One",
-      "Goudy+Bookletter+1911",
-      "Gravitas+One",
-      "Gruppo",
-      "Hammersmith+One",
-      "Holtwood+One+SC",
-      "Homemade+Apple",
-      "Inconsolata",
-      "Indie+Flower",
-      "IM+Fell+DW+Pica",
-      "IM+Fell+DW+Pica+SC",
-      "IM+Fell+Double+Pica",
-      "IM+Fell+Double+Pica+SC",
-      "IM+Fell+English",
-      "IM+Fell+English+SC",
-      "IM+Fell+French+Canon",
-      "IM+Fell+French+Canon+SC",
-      "IM+Fell+Great+Primer",
-      "IM+Fell+Great+Primer+SC",
-      "Irish+Grover",
-      "Irish+Growler",
-      "Istok+Web",
-      "Josefin+Sans",
-      "Josefin+Slab",
-      "Judson",
-      "Jura",
-      "Jura:500",
-      "Jura:600",
-      "Just+Another+Hand",
-      "Just+Me+Again+Down+Here",
-      "Kameron",
-      "Kenia",
-      "Kranky",
-      "Kreon",
-      "Kristi",
-      "La+Belle+Aurore",
-      "Lato:100",
-      "Lato:100italic",
-      "Lato:300", 
-      "Lato",
-      "Lato:bold",  
-      "Lato:900",
-      "League+Script",
-      "Lekton",  
-      "Limelight",  
-      "Lobster",
-      "Lobster Two",
-      "Lora",
-      "Love+Ya+Like+A+Sister",
-      "Loved+by+the+King",
-      "Luckiest+Guy",
-      "Maiden+Orange",
-      "Mako",
-      "Maven+Pro",
-      "Maven+Pro:500",
-      "Maven+Pro:700",
-      "Maven+Pro:900",
-      "Meddon",
-      "MedievalSharp",
-      "Megrim",
-      "Merriweather",
-      "Metrophobic",
-      "Michroma",
-      "Miltonian Tattoo",
-      "Miltonian",
-      "Modern Antiqua",
-      "Monofett",
-      "Molengo",
-      "Mountains of Christmas",
-      "Muli:300", 
-      "Muli", 
-      "Neucha",
-      "Neuton",
-      "News+Cycle",
-      "Nixie+One",
-      "Nobile",
-      "Nova+Cut",
-      "Nova+Flat",
-      "Nova+Mono",
-      "Nova+Oval",
-      "Nova+Round",
-      "Nova+Script",
-      "Nova+Slim",
-      "Nova+Square",
-      "Nunito:light",
-      "Nunito",
-      "OFL+Sorts+Mill+Goudy+TT",
-      "Old+Standard+TT",
-      "Open+Sans:300",
-      "Open+Sans",
-      "Open+Sans:600",
-      "Open+Sans:800",
-      "Open+Sans+Condensed:300",
-      "Orbitron",
-      "Orbitron:500",
-      "Orbitron:700",
-      "Orbitron:900",
-      "Oswald",
-      "Over+the+Rainbow",
-      "Reenie+Beanie",
-      "Pacifico",
-      "Patrick+Hand",
-      "Paytone+One", 
-      "Permanent+Marker",
-      "Philosopher",
-      "Play",
-      "Playfair+Display",
-      "Podkova",
-      "PT+Sans",
-      "PT+Sans+Narrow",
-      "PT+Sans+Narrow:regular,bold",
-      "PT+Serif",
-      "PT+Serif Caption",
-      "Puritan",
-      "Quattrocento",
-      "Quattrocento+Sans",
-      "Radley",
-      "Raleway:100",
-      "Redressed",
-      "Rock+Salt",
-      "Rokkitt",
-      "Ruslan+Display",
-      "Schoolbell",
-      "Shadows+Into+Light",
-      "Shanti",
-      "Sigmar+One",
-      "Six+Caps",
-      "Slackey",
-      "Smythe",
-      "Sniglet:800",
-      "Special+Elite",
-      "Stardos+Stencil",
-      "Sue+Ellen+Francisco",
-      "Sunshiney",
-      "Swanky+and+Moo+Moo",
-      "Syncopate",
-      "Tangerine",
-      "Tenor+Sans",
-      "Terminal+Dosis+Light",
-      "The+Girl+Next+Door",
-      "Tinos",
-      "Ubuntu",
-      "Ultra",
-      "Unkempt",
-      "UnifrakturCook:bold",
-      "UnifrakturMaguntia",
-      "Varela",
-      "Varela Round",
-      "Vibur",
-      "Vollkorn",
-      "VT323",
-      "Waiting+for+the+Sunrise",
-      "Wallpoet",
-      "Walter+Turncoat",
-      "Wire+One",
-      "Yanone+Kaffeesatz",
-      "Yanone+Kaffeesatz:300",
-      "Yanone+Kaffeesatz:400",
-      "Yanone+Kaffeesatz:700",
-      "Yeseva+One",
-      "Zeyada"];
 
     var settings = {
       style: 'font-select',
@@ -241,18 +22,55 @@
     var Fontselect = (function(){
     
       function Fontselect(original, o){
+        var self = this;
         this.$original = $(original);
         this.options = o;
         this.active = false;
-        this.setupHtml();
-        this.getVisibleFonts();
-        this.bindEvents();
+        window.loaded_fonts = {};
+        $.fancybox.showActivity();
+        this.fetchFontsList().done(_.bind(function(data){
+            // this.$original.hide();
+            this.$original.show();
+            this.$original.typeahead({ 
+                source:data.items,
+                displayText: function(item){
+                    return item.family;
+                },
+                fitToElement:true,
+                updater: function(item){
+                    return item;
+                },
+                items: "all",
+                showHintOnFocus: "all",
+                sorter: function(items){
+                    self.$results.find("li[data-font-family]").hide();
+                    $.each(items, function(index, val) {
+                        self.$results.find("li[data-font-family*='"+val.family+"']").show();
+                    });
+                    self.$results.closest(".popup").trigger("scroll");
+                    return [];
+                },
+                matcher: function(item){
+                    return (item.family.toLowerCase().indexOf(this.query.toLowerCase()) !== -1);
+                }
+            });
+            this.setupHtml(data.items);
+            this.bindEvents();
 
-        var font = this.$original.val();
-        if (font) {
-          this.updateSelected();
-          this.addFontLink(font);
-        }
+            var font = this.$original.val();
+            if (font) {
+              this.updateSelected();
+              this.addFontLink(font);
+            }
+            
+            setTimeout(_.bind(function(){
+                this.toggleDrop();
+                this.getVisibleFonts();
+                $.fancybox.hideActivity();
+            },this), 500);
+            
+        }, this));
+
       }
       
       Fontselect.prototype.bindEvents = function(){
@@ -271,21 +89,24 @@
         if(this.active){
           this.$element.removeClass('font-select-active');
           this.$drop.hide();
-          clearInterval(this.visibleInterval);
-          
-        } else {
+          $(this.$drop).closest(".popup").off("scroll");
+        } else if ($('span', this.$select).is(":visible")) {
           this.$element.addClass('font-select-active');
           this.$drop.show();
           this.moveToSelected();
-          this.visibleInterval = setInterval(__bind(this.getVisibleFonts, this), 500);
+          $(this.$drop).closest(".popup").scroll(_.debounce(__bind(this.getVisibleFonts, this), 500));
         }
         
         this.active = !this.active;
+        return this.$original;
       };
       
       Fontselect.prototype.selectFont = function(){
-        
-        var font = $('li.active', this.$results).data('value');
+        var active = $('li.active', this.$results);
+        var font = active.data('value');
+        this.$original.data("font-weight", active.data("font-weight"));
+        this.$original.data("font-style", active.data("font-style"));
+        this.$original.data("font-family", active.data("font-family"));
         this.$original.val(font).change();
         this.updateSelected();
         this.toggleDrop();
@@ -309,6 +130,29 @@
         $(ev.currentTarget).addClass('active');
       };
       
+      Fontselect.prototype.fetchFontsList = function(){
+          var cached_gwf_data = $("body").data("gwf-fonts-list")
+          if (cached_gwf_data) {
+              var deferred = $.Deferred();
+              return deferred.resolve(cached_gwf_data);
+          }else{
+              return $.ajax({
+                  type    : "GET",
+                  cache   : "true",
+                  dataType: "json",
+                  url     : $("body").data("gwf-fonts-target") || "/edit/webfonts/", 
+                  headers : { "X-CSRFToken" : Cookies.get("csrftoken") },
+                  success : function (data) {
+                      $("body").data("gwf-fonts-list", data);
+                  },
+                  error   : function () {
+                  
+                  }
+              });
+          }
+
+      };
+      
       Fontselect.prototype.deactivateFont = function(ev){
         
         $(ev.currentTarget).removeClass('active');
@@ -317,42 +161,43 @@
       Fontselect.prototype.updateSelected = function(){
         
         var font = this.$original.val();
-        $('span', this.$element).text(this.toReadable(font)).css(this.toStyle(font));
       };
       
-      Fontselect.prototype.setupHtml = function(){
+      Fontselect.prototype.setupHtml = function(fonts){
       
-        this.$original.empty().hide();
+        // this.$original.empty().hide();
         this.$element = $('<div>', {'class': this.options.style});
         this.$arrow = $('<div><b></b></div>');
         this.$select = $('<a><span>'+ this.options.placeholder +'</span></a>');
         this.$drop = $('<div>', {'class': 'fs-drop'});
         this.$results = $('<ul>', {'class': 'fs-results'});
         this.$original.after(this.$element.append(this.$select.append(this.$arrow)).append(this.$drop));
-        this.$drop.append(this.$results.append(this.fontsAsHtml())).hide();
+        this.$drop.append(this.$results.append(this.fontsAsHtml(fonts))).hide();
       };
       
-      Fontselect.prototype.fontsAsHtml = function(){
-        
-        var l = fonts.length;
-        var r, s, h = '';
-        
-        for(var i=0; i<l; i++){
-          r = this.toReadable(fonts[i]);
-          s = this.toStyle(fonts[i]);
-          h += '<li data-value="'+ fonts[i] +'" style="font-family: '+s['font-family'] +'; font-weight: '+s['font-weight'] +'">'+ r +'</li>';
-        }
-        
-        return h;
-      };
-      
-      Fontselect.prototype.toReadable = function(font){
-        return font.replace(/[\+|:]/g, ' ');
-      };
-      
-      Fontselect.prototype.toStyle = function(font){
-        var t = font.split(':');
-        return {'font-family': this.toReadable(t[0]), 'font-weight': (t[1] || 400)};
+      Fontselect.prototype.fontsAsHtml = function(data){
+        var self = this;
+        var fonts = _.map(data, function(item){
+            var variants = _.map(item['variants'], function(variants_item){
+                return '<li data-value="'+ ((variants_item === "regular") ? item['family'] : item['family'] + ":" + variants_item) +'" '+
+                        'data-font-family="'+item['family'] + ', ' + item['category']+'" '+
+                        'data-font-weight="'+(variants_item.replace(/italic/g, '') || 400)+'" '+
+                        'data-font-style="'+((variants_item.indexOf("italic") === -1) ? "normal" : "italic")+'" '+
+                        'style="font-family: ' + item['family'] + ', ' + item['category'] +
+                         '; font-weight: ' + (variants_item.replace(/italic/g, '') || 400) +
+                         '; font-style: ' + ((variants_item.indexOf("italic") === -1) ? "normal" : "italic") + ';">' +
+                         ((variants_item === "regular") ? item['family'] : item['family'] + ":" + variants_item) +
+                        "</li>";
+            });
+            variants = _.reduce(variants, function(a, b){
+                return  a + b;
+            });
+            return variants;
+        });
+        fonts = _.reduce(fonts, function(a, b){
+            return a + b;
+        });
+        return fonts;
       };
       
       Fontselect.prototype.getVisibleFonts = function(){
@@ -360,34 +205,23 @@
         if(this.$results.is(':hidden')) return;
         
         var fs = this;
-        var top = this.$results.scrollTop();
-        var bottom = top + this.$results.height();
-        
-        if(this.options.lookahead){
-          var li = $('li', this.$results).first().height();
-          bottom += li*this.options.lookahead;
-        }
-       
-        $('li', this.$results).each(function(){
-
-          var ft = $(this).position().top+top;
-          var fb = ft + $(this).height();
-
-          if ((fb >= top) && (ft <= bottom)){
+        var fonts_list = [];
+        $('li', this.$results).inViewport()
+            .each(function(){
             var font = $(this).data('value');
-            fs.addFontLink(font);
-          }
-          
+            if (font && !(font in window.loaded_fonts)) {
+                fonts_list.push(font);
+                window.loaded_fonts[font] = true;
+            }
         });
+        fonts_list.length && fs.addFontLink(fonts_list.join(","));
       };
       
       Fontselect.prototype.addFontLink = function(font){
-      
-        var link = this.options.api + font;
-      
-        if ($("link[href*='" + font + "']").length === 0){
-			$('link:last').after('<link href="' + link + '" rel="stylesheet" type="text/css">');
-		}
+          if (font) {
+              require(['font!google,families:['+font+']'], function(Font){
+              });
+          }
       };
     
       return Fontselect;
@@ -402,3 +236,4 @@
 
   };
 })(jQuery);
+});
